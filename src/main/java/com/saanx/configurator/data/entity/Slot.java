@@ -16,10 +16,9 @@ public class Slot extends BasicEntity {
 	@JsonIgnore
 	private Long version;
 	private String name;
-	@OneToMany
-	private List<SlotEntry> possibleEntries;
-	@OneToOne
-	private SlotEntry selectedEntry;
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<SlotEntry> entries;
+	private Long selectedEntryId;
 	private int position; // in Configuration
 
 
@@ -50,20 +49,20 @@ public class Slot extends BasicEntity {
 		this.name = name;
 	}
 
-	public List<SlotEntry> getPossibleEntries() {
-		return possibleEntries;
+	public List<SlotEntry> getEntries() {
+		return entries;
 	}
 
-	public void setPossibleEntries(List<SlotEntry> possibleEntries) {
-		this.possibleEntries = possibleEntries;
+	public void setEntries(List<SlotEntry> entries) {
+		this.entries = entries;
 	}
 
-	public SlotEntry getSelected() {
-		return selectedEntry;
+	public Long getSelectedEntryId() {
+		return selectedEntryId;
 	}
 
-	public void setSelectedEntry(SlotEntry selectedEntry) {
-		this.selectedEntry = selectedEntry;
+	public void setSelectedEntryId(Long index) {
+		this.selectedEntryId = index;
 	}
 
 	public int getPosition() {
@@ -90,7 +89,7 @@ public class Slot extends BasicEntity {
 	}
 
 	public Slot possibleEntries(final List<SlotEntry> possibleEntries) {
-		this.possibleEntries = possibleEntries;
+		this.entries = possibleEntries;
 		return this;
 	}
 

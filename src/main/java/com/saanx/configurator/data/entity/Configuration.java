@@ -27,7 +27,7 @@ public class Configuration extends BasicEntity {
 	@Enumerated(value = EnumType.STRING)
 	private Visibility visibility = Visibility.PRIVATE;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	@RestResource(path = "slots", rel = "slots")
 	private List<Slot> slots;
 
