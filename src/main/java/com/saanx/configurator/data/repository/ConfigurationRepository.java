@@ -7,6 +7,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface ConfigurationRepository extends PagingAndSortingRepository<Configuration, Long> {
-	@Override
-	Configuration findOne(Long aLong);
 }
