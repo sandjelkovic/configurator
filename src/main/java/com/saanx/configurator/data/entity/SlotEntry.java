@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class SlotEntry {
+public class SlotEntry extends BasicEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true, nullable = false)
@@ -116,5 +116,10 @@ public class SlotEntry {
 	public SlotEntry position(final int position) {
 		this.position = position;
 		return this;
+	}
+
+	@Override
+	protected Object getInternalId() {
+		return getId();
 	}
 }

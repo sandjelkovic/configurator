@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Slot {
+public class Slot extends BasicEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true, nullable = false)
@@ -104,4 +104,8 @@ public class Slot {
 		return this;
 	}
 
+	@Override
+	protected Object getInternalId() {
+		return getId();
+	}
 }
