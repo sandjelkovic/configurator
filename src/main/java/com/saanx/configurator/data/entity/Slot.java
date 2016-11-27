@@ -58,7 +58,7 @@ public class Slot extends BasicEntity {
 		this.possibleEntries = possibleEntries;
 	}
 
-	public SlotEntry getSelectedEntry() {
+	public SlotEntry getSelected() {
 		return selectedEntry;
 	}
 
@@ -91,16 +91,6 @@ public class Slot extends BasicEntity {
 
 	public Slot possibleEntries(final List<SlotEntry> possibleEntries) {
 		this.possibleEntries = possibleEntries;
-		return this;
-	}
-
-	public Slot selectedEntry(final SlotEntry selectedEntry) {
-		this.selectedEntry = selectedEntry;
-		return this;
-	}
-
-	public Slot position(final int position) {
-		this.position = position;
 		return this;
 	}
 

@@ -2,6 +2,7 @@ package com.saanx.configurator.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Configuration extends BasicEntity {
 	private Visibility visibility = Visibility.PRIVATE;
 
 	@OneToMany(fetch = FetchType.LAZY)
+	@RestResource(path = "slots", rel = "slots")
 	private List<Slot> slots;
 
 	public Configuration() {
@@ -110,10 +112,12 @@ public class Configuration extends BasicEntity {
 		return this;
 	}
 
+	@JsonIgnore
 	public boolean isPublic() {
 		return Visibility.PUBLIC.equals(visibility);
 	}
 
+	@JsonIgnore
 	public boolean isPrivate() {
 		return Visibility.PRIVATE.equals(visibility);
 	}
