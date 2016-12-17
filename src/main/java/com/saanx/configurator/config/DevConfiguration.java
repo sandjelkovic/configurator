@@ -4,7 +4,6 @@ import com.saanx.ConfiguratorApplication;
 import com.saanx.configurator.data.entity.Slot;
 import com.saanx.configurator.data.entity.SlotEntry;
 import com.saanx.configurator.data.entity.User;
-import com.saanx.configurator.data.entity.Visibility;
 import com.saanx.configurator.data.repository.ConfigurationRepository;
 import com.saanx.configurator.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +49,14 @@ public class DevConfiguration {
 	@Profile(ConfiguratorApplication.PROFILE_DEV)
 	public CommandLineRunner testConfigurationEntities() {
 		return (args) -> {
-			configurationRepository.save(new com.saanx.configurator.data.entity.Configuration()
-					.name("Empty config")
-					.visibility(Visibility.PUBLIC));
-			configurationRepository.save(new com.saanx.configurator.data.entity.Configuration()
-					.name("Prepared config")
-					.visibility(Visibility.PUBLIC)
-			.slots(createExampleSlots()));
+			//until solution is found for Security
+//			configurationRepository.save(new com.saanx.configurator.data.entity.Configuration()
+//					.name("Empty config")
+//					.visibility(Visibility.PUBLIC));
+//			configurationRepository.save(new com.saanx.configurator.data.entity.Configuration()
+//					.name("Prepared config")
+//					.visibility(Visibility.PUBLIC)
+//			.slots(createExampleSlots()));
 		};
 	}
 

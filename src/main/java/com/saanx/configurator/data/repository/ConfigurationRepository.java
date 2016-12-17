@@ -30,7 +30,7 @@ public interface ConfigurationRepository extends PagingAndSortingRepository<Conf
 	void delete(Configuration entity);
 
 	@PostAuthorize("#username == authentication.name")
-	Page<Configuration> findByUser_Username(String username);
+	Page<Configuration> findByUser_Username(String username, Pageable pageable);
 
 	@Override
 	@RestResource(exported = false)
