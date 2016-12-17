@@ -31,6 +31,8 @@ public class Configuration extends BasicEntity {
 	@RestResource(path = "slots", rel = "slots")
 	private List<Slot> slots;
 
+	private User user;
+
 	public Configuration() {
 	}
 
@@ -82,6 +84,14 @@ public class Configuration extends BasicEntity {
 		this.slots = slots;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Configuration id(final Long id) {
 		this.id = id;
 		return this;
@@ -109,6 +119,11 @@ public class Configuration extends BasicEntity {
 
 	public Configuration slots(final List<Slot> slots) {
 		this.slots = slots;
+		return this;
+	}
+
+	public Configuration user(final User user) {
+		this.user = user;
 		return this;
 	}
 
