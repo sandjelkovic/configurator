@@ -1,5 +1,7 @@
 package com.saanx.configurator.config;
 
+import com.saanx.configurator.data.handlers.ConfigurationEventHandler;
+import com.saanx.configurator.data.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -19,5 +21,10 @@ public class ApplicationConfiguration {
 				config.setReturnBodyOnCreate(true);
 			}
 		};
+	}
+
+	@Bean
+	public ConfigurationEventHandler configurationEventHandler(UserRepository userRepository) {
+		return new ConfigurationEventHandler(userRepository);
 	}
 }
