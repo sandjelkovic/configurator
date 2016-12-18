@@ -27,10 +27,14 @@ public class Configuration extends BasicEntity {
 	@Enumerated(value = EnumType.STRING)
 	private Visibility visibility = Visibility.PRIVATE;
 
-	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "configuration", orphanRemoval = true, cascade = CascadeType.ALL)
 	@RestResource(path = "slots", rel = "slots")
 	private List<Slot> slots;
 
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	@RestResource(exported = false)
 	private User user;
 
 	public Configuration() {
@@ -140,5 +144,18 @@ public class Configuration extends BasicEntity {
 	@Override
 	protected Object getInternalId() {
 		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "Configuration{" +
+				"id=" + id +
+				", version=" + version +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", visibility=" + visibility +
+				", slots=" + slots +
+				", user=" + user +
+				'}';
 	}
 }

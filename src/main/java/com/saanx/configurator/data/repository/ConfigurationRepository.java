@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -14,11 +15,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @RepositoryRestResource
 public interface ConfigurationRepository extends PagingAndSortingRepository<Configuration, Long> {
 	@Override
-	@PreAuthorize("@configurationRepository.findOne(#entity?.id)?.user.username == authentication.name")
-	Configuration save(Configuration entity);
+	@PreAuthorize("#entity?.id == null or @configurationRepository.findOne(#entity?.id)?.user.username == authentication.name")
+	Configuration save(@Param("entity") Configuration entity);
 
 	@Override
-	@PostAuthorize("returnObject.user.username == authentication.name and returnObject.public")
+	@PostAuthorize("returnObject?.user?.username == authentication.name and returnObject?.public")
 	Configuration findOne(Long id);
 
 	@Override
@@ -30,6 +31,7 @@ public interface ConfigurationRepository extends PagingAndSortingRepository<Conf
 	void delete(Configuration entity);
 
 	@PostAuthorize("#username == authentication.name")
+	@RestResource(path = "configurationss", rel = "configurationss")
 	Page<Configuration> findByUser_Username(String username, Pageable pageable);
 
 	@Override
@@ -41,7 +43,7 @@ public interface ConfigurationRepository extends PagingAndSortingRepository<Conf
 	Iterable<Configuration> findAll(Sort sort);
 
 	@Override
-	@RestResource(exported = false)
+	@PreAuthorize("hasRole('ROOT')")
 	Page<Configuration> findAll(Pageable pageable);
 
 	@Override

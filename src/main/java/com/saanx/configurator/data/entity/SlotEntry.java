@@ -2,6 +2,7 @@ package com.saanx.configurator.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,6 +24,11 @@ public class SlotEntry extends BasicEntity {
 	private String url;
 	private BigDecimal price;
 	private int position;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "slot")
+	@RestResource(exported = false)
+	private Slot slot;
 
 	public SlotEntry() {
 	}
@@ -83,6 +89,14 @@ public class SlotEntry extends BasicEntity {
 		this.position = position;
 	}
 
+	public Slot getSlot() {
+		return slot;
+	}
+
+	public void setSlot(Slot slot) {
+		this.slot = slot;
+	}
+
 	public SlotEntry id(final Long id) {
 		this.id = id;
 		return this;
@@ -115,6 +129,11 @@ public class SlotEntry extends BasicEntity {
 
 	public SlotEntry position(final int position) {
 		this.position = position;
+		return this;
+	}
+
+	public SlotEntry slot(final Slot slot) {
+		this.slot = slot;
 		return this;
 	}
 

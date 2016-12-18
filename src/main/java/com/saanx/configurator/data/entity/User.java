@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,6 +40,9 @@ public class User extends BasicEntity implements Serializable {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<String> authorities = EmptyCollections.set();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<Configuration> configurations = EmptyCollections.list();
 
 	@Version
 	@JsonIgnore
@@ -103,6 +107,14 @@ public class User extends BasicEntity implements Serializable {
 		this.authorities = authorities;
 	}
 
+	public List<Configuration> getConfigurations() {
+		return configurations;
+	}
+
+	public void setConfigurations(List<Configuration> configurations) {
+		this.configurations = configurations;
+	}
+
 	public Long getVersion() {
 		return version;
 	}
@@ -145,6 +157,12 @@ public class User extends BasicEntity implements Serializable {
 		this.authorities = authorities;
 		return this;
 	}
+
+	public User configurations(final List<Configuration> configurations) {
+		this.configurations = configurations;
+		return this;
+	}
+
 
 	public User version(final Long version) {
 		this.version = version;

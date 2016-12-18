@@ -16,11 +16,13 @@ public class Slot extends BasicEntity {
 	@JsonIgnore
 	private Long version;
 	private String name;
-	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "slot", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<SlotEntry> entries;
 	private Long selectedEntryId;
 	private int position; // in Configuration
-
+	@ManyToOne
+	@JoinColumn(name = "configurationId")
+	private Configuration configuration;
 
 	public Slot() {
 	}
@@ -73,6 +75,14 @@ public class Slot extends BasicEntity {
 		this.position = position;
 	}
 
+	public Configuration getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(Configuration configuration) {
+		this.configuration = configuration;
+	}
+
 	public Slot id(final Long id) {
 		this.id = id;
 		return this;
@@ -90,6 +100,11 @@ public class Slot extends BasicEntity {
 
 	public Slot possibleEntries(final List<SlotEntry> possibleEntries) {
 		this.entries = possibleEntries;
+		return this;
+	}
+
+	public Slot configuration(final Configuration configuration) {
+		this.configuration = configuration;
 		return this;
 	}
 
