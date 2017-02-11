@@ -18,7 +18,7 @@ public class ApplicationConfiguration {
 			@Override
 			public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
 				config.setRepositoryDetectionStrategy(ANNOTATED);
-				config.setReturnBodyOnCreate(true);
+				config.setReturnBodyForPutAndPost(true);
 			}
 		};
 	}

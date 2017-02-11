@@ -15,11 +15,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @RepositoryRestResource
 public interface ConfigurationRepository extends PagingAndSortingRepository<Configuration, Long> {
 	@Override
-	@PreAuthorize("#entity?.id == null or @configurationRepository.findOne(#entity?.id)?.user.username == authentication.name")
+	@PreAuthorize("#entity?.id == null or @configurationRepository.findOne(#entity?.id)?.user?.username == authentication.name")
 	Configuration save(@Param("entity") Configuration entity);
 
 	@Override
-	@PostAuthorize("returnObject?.user?.username == authentication.name and returnObject?.public")
+	@PostAuthorize("returnObject?.user?.username == authentication.name or returnObject?.public")
 	Configuration findOne(Long id);
 
 	@Override
@@ -31,7 +31,7 @@ public interface ConfigurationRepository extends PagingAndSortingRepository<Conf
 	void delete(Configuration entity);
 
 	@PostAuthorize("#username == authentication.name")
-	@RestResource(path = "configurationss", rel = "configurationss")
+	@RestResource(path = "configurations", rel = "configurations")
 	Page<Configuration> findByUser_Username(String username, Pageable pageable);
 
 	@Override

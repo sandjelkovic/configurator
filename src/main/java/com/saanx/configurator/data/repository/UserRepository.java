@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 import java.util.Optional;
 
-@RepositoryRestResource()
+@RepositoryRestResource
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 	List<User> findByEmail(String email);
 

@@ -3,8 +3,17 @@ package com.saanx.configurator.data.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.saanx.util.EmptyCollections;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +36,7 @@ public class User extends BasicEntity implements Serializable {
 	private String password;
 
 	@Column(unique = true, nullable = false, length = 50)
+	@Length(min = 3, max = 50)
 	private String username;
 
 	@Column(nullable = false)

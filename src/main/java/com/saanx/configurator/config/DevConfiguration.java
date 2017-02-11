@@ -70,7 +70,7 @@ public class DevConfiguration {
 	private List<SlotEntry> createExampleEntries() {
 		ArrayList<SlotEntry> slotEntries = new ArrayList<>();
 		slotEntries.add(new SlotEntry().data("datah")
-		.name("entry 1"));
+				.name("entry 1"));
 		return slotEntries;
 	}
 
