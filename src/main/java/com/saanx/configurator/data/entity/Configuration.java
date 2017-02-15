@@ -4,7 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
 import java.util.List;
 
 @Entity
@@ -144,6 +156,33 @@ public class Configuration extends BasicEntity {
 	@Override
 	protected Object getInternalId() {
 		return id;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Configuration)) return false;
+		if (!super.equals(o)) return false;
+
+		Configuration that = (Configuration) o;
+
+		if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+		if (getVersion() != null ? !getVersion().equals(that.getVersion()) : that.getVersion() != null) return false;
+		if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
+		if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null) return false;
+		if (getVisibility() != that.getVisibility()) return false;
+		return getSlots() != null ? getSlots().equals(that.getSlots()) : that.getSlots() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getId() != null ? getId().hashCode() : 0;
+		result = 31 * result + (getVersion() != null ? getVersion().hashCode() : 0);
+		result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+		result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+		result = 31 * result + (getVisibility() != null ? getVisibility().hashCode() : 0);
+		result = 31 * result + (getSlots() != null ? getSlots().hashCode() : 0);
+		return result;
 	}
 
 	@Override

@@ -17,5 +17,12 @@ public abstract class BasicEntity {
 		return getInternalId().equals(oth.getInternalId());
 	}
 
+	@Override
+	public int hashCode() {
+		int result = getInternalId() != null ? getInternalId().hashCode() : 0;
+		return result;
+	}
+
+
 	abstract protected Object getInternalId();
 }

@@ -2,7 +2,17 @@ package com.saanx.configurator.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
 import java.util.List;
 
 @Entity
@@ -106,6 +116,37 @@ public class Slot extends BasicEntity {
 	public Slot configuration(final Configuration configuration) {
 		this.configuration = configuration;
 		return this;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Slot)) return false;
+		if (!super.equals(o)) return false;
+
+		Slot slot = (Slot) o;
+
+		if (getPosition() != slot.getPosition()) return false;
+		if (getId() != null ? !getId().equals(slot.getId()) : slot.getId() != null) return false;
+		if (getVersion() != null ? !getVersion().equals(slot.getVersion()) : slot.getVersion() != null) return false;
+		if (getName() != null ? !getName().equals(slot.getName()) : slot.getName() != null) return false;
+		if (getEntries() != null ? !getEntries().equals(slot.getEntries()) : slot.getEntries() != null) return false;
+		if (getSelectedEntryId() != null ? !getSelectedEntryId().equals(slot.getSelectedEntryId()) : slot.getSelectedEntryId() != null)
+			return false;
+		return getConfiguration() != null ? getConfiguration().equals(slot.getConfiguration()) : slot.getConfiguration() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (getId() != null ? getId().hashCode() : 0);
+		result = 31 * result + (getVersion() != null ? getVersion().hashCode() : 0);
+		result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+		result = 31 * result + (getEntries() != null ? getEntries().hashCode() : 0);
+		result = 31 * result + (getSelectedEntryId() != null ? getSelectedEntryId().hashCode() : 0);
+		result = 31 * result + getPosition();
+		result = 31 * result + (getConfiguration() != null ? getConfiguration().hashCode() : 0);
+		return result;
 	}
 
 	@Override

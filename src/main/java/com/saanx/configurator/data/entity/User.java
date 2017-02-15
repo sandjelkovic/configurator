@@ -14,13 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User extends BasicEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class User extends BasicEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -177,6 +175,38 @@ public class User extends BasicEntity implements Serializable {
 	public User version(final Long version) {
 		this.version = version;
 		return this;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof User)) return false;
+		if (!super.equals(o)) return false;
+
+		User user = (User) o;
+
+		if (isEnabled() != user.isEnabled()) return false;
+		if (isApproved() != user.isApproved()) return false;
+		if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null) return false;
+		if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
+		if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null) return false;
+		if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null) return false;
+		if (getAuthorities() != null ? !getAuthorities().equals(user.getAuthorities()) : user.getAuthorities() != null) return false;
+		return getVersion() != null ? getVersion().equals(user.getVersion()) : user.getVersion() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (getId() != null ? getId().hashCode() : 0);
+		result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+		result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+		result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
+		result = 31 * result + (isEnabled() ? 1 : 0);
+		result = 31 * result + (isApproved() ? 1 : 0);
+		result = 31 * result + (getAuthorities() != null ? getAuthorities().hashCode() : 0);
+		result = 31 * result + (getVersion() != null ? getVersion().hashCode() : 0);
+		return result;
 	}
 
 	@Override

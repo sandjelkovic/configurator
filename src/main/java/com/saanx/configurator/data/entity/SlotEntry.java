@@ -4,7 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 import java.math.BigDecimal;
 
 @Entity
@@ -135,6 +142,38 @@ public class SlotEntry extends BasicEntity {
 	public SlotEntry slot(final Slot slot) {
 		this.slot = slot;
 		return this;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof SlotEntry)) return false;
+		if (!super.equals(o)) return false;
+
+		SlotEntry slotEntry = (SlotEntry) o;
+
+		if (getPosition() != slotEntry.getPosition()) return false;
+		if (getId() != null ? !getId().equals(slotEntry.getId()) : slotEntry.getId() != null) return false;
+		if (getVersion() != null ? !getVersion().equals(slotEntry.getVersion()) : slotEntry.getVersion() != null) return false;
+		if (getName() != null ? !getName().equals(slotEntry.getName()) : slotEntry.getName() != null) return false;
+		if (getData() != null ? !getData().equals(slotEntry.getData()) : slotEntry.getData() != null) return false;
+		if (getUrl() != null ? !getUrl().equals(slotEntry.getUrl()) : slotEntry.getUrl() != null) return false;
+		if (getPrice() != null ? !getPrice().equals(slotEntry.getPrice()) : slotEntry.getPrice() != null) return false;
+		return getSlot() != null ? getSlot().equals(slotEntry.getSlot()) : slotEntry.getSlot() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (getId() != null ? getId().hashCode() : 0);
+		result = 31 * result + (getVersion() != null ? getVersion().hashCode() : 0);
+		result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+		result = 31 * result + (getData() != null ? getData().hashCode() : 0);
+		result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
+		result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
+		result = 31 * result + getPosition();
+		result = 31 * result + (getSlot() != null ? getSlot().hashCode() : 0);
+		return result;
 	}
 
 	@Override
