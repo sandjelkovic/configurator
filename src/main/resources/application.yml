@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: Configurator
+management:
+  port: 8000
