@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -39,7 +38,7 @@ public class Configuration extends BasicEntity {
 	@Enumerated(value = EnumType.STRING)
 	private Visibility visibility = Visibility.PRIVATE;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "configuration", orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "configuration", orphanRemoval = true)
 	@RestResource(path = "slots", rel = "slots")
 	private List<Slot> slots;
 

@@ -29,7 +29,7 @@ public class SlotEntry extends BasicEntity {
 	private String data;
 	@URL
 	private String url;
-	private BigDecimal price;
+	private BigDecimal value;
 	private int position;
 	@JsonIgnore
 	@ManyToOne
@@ -80,12 +80,12 @@ public class SlotEntry extends BasicEntity {
 		this.url = url;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	public BigDecimal getValue() {
+		return value;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setValue(BigDecimal value) {
+		this.value = value;
 	}
 
 	public int getPosition() {
@@ -130,7 +130,7 @@ public class SlotEntry extends BasicEntity {
 	}
 
 	public SlotEntry price(final BigDecimal price) {
-		this.price = price;
+		this.value = price;
 		return this;
 	}
 
@@ -158,7 +158,7 @@ public class SlotEntry extends BasicEntity {
 		if (getName() != null ? !getName().equals(slotEntry.getName()) : slotEntry.getName() != null) return false;
 		if (getData() != null ? !getData().equals(slotEntry.getData()) : slotEntry.getData() != null) return false;
 		if (getUrl() != null ? !getUrl().equals(slotEntry.getUrl()) : slotEntry.getUrl() != null) return false;
-		if (getPrice() != null ? !getPrice().equals(slotEntry.getPrice()) : slotEntry.getPrice() != null) return false;
+		if (getValue() != null ? !getValue().equals(slotEntry.getValue()) : slotEntry.getValue() != null) return false;
 		return getSlot() != null ? getSlot().equals(slotEntry.getSlot()) : slotEntry.getSlot() == null;
 	}
 
@@ -170,7 +170,7 @@ public class SlotEntry extends BasicEntity {
 		result = 31 * result + (getName() != null ? getName().hashCode() : 0);
 		result = 31 * result + (getData() != null ? getData().hashCode() : 0);
 		result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
-		result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
+		result = 31 * result + (getValue() != null ? getValue().hashCode() : 0);
 		result = 31 * result + getPosition();
 		result = 31 * result + (getSlot() != null ? getSlot().hashCode() : 0);
 		return result;

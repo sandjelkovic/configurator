@@ -1,6 +1,7 @@
 package com.saanx.configurator.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.saanx.util.EmptyCollections;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -27,7 +29,7 @@ public class Slot extends BasicEntity {
 	private Long version;
 	private String name;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "slot", orphanRemoval = true, cascade = CascadeType.ALL)
-	private List<SlotEntry> entries;
+	private List<SlotEntry> entries = EmptyCollections.list();
 	private Long selectedEntryId;
 	private int position; // in Configuration
 	@ManyToOne
@@ -93,6 +95,13 @@ public class Slot extends BasicEntity {
 		this.configuration = configuration;
 	}
 
+	public BigDecimal getValue() {
+		return EmptyCollections.emptyIfNull(getEntries()).stream()
+				.map(SlotEntry::getValue)
+				.max(BigDecimal::compareTo)
+				.orElse(BigDecimal.ZERO);
+	}
+
 	public Slot id(final Long id) {
 		this.id = id;
 		return this;
@@ -108,8 +117,8 @@ public class Slot extends BasicEntity {
 		return this;
 	}
 
-	public Slot possibleEntries(final List<SlotEntry> possibleEntries) {
-		this.entries = possibleEntries;
+	public Slot entries(final List<SlotEntry> entries) {
+		this.entries = entries;
 		return this;
 	}
 

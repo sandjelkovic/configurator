@@ -33,6 +33,10 @@ public interface ConfigurationRepository extends PagingAndSortingRepository<Conf
 	@PostAuthorize("#username == authentication.name")
 	@RestResource(path = "owned", rel = "owned")
 	Page<Configuration> findByUser_Username(String username, Pageable pageable);
+//
+//	@PostAuthorize("#username == authentication.name")
+//	@RestResource(path = "owned", rel = "owned")
+//	Page<Configuration> findByUser_Username(String username, Pageable pageable);
 
 	@Override
 	@RestResource(exported = false)

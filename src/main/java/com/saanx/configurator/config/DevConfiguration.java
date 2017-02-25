@@ -63,7 +63,7 @@ public class DevConfiguration {
 	private List<Slot> createExampleSlots() {
 		ArrayList<Slot> slots = new ArrayList<>();
 		slots.add(new Slot().name("First slot!")
-				.possibleEntries(createExampleEntries()));
+				.entries(createExampleEntries()));
 		return slots;
 	}
 
