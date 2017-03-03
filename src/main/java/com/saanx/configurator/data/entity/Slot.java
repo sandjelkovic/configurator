@@ -26,7 +26,6 @@ public class Slot extends BasicEntity {
 	private String name;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "slot", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<SlotEntry> entries = EmptyCollections.list();
-	private Long selectedEntryId;
 	private int position; // in Configuration
 	@ManyToOne
 	private Configuration configuration;

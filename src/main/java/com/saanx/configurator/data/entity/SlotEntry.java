@@ -29,6 +29,7 @@ public class SlotEntry extends BasicEntity {
 	@URL
 	private String url;
 	private BigDecimal value;
+	private boolean selected;
 	private int position;
 	@JsonIgnore
 	@ManyToOne
@@ -67,6 +68,11 @@ public class SlotEntry extends BasicEntity {
 
 	public SlotEntry position(final int position) {
 		this.position = position;
+		return this;
+	}
+
+	public SlotEntry selected(final boolean selected) {
+		this.selected = selected;
 		return this;
 	}
 
