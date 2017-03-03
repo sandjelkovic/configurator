@@ -1,6 +1,7 @@
 package com.saanx.configurator.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -19,6 +20,7 @@ import javax.persistence.Version;
 import java.util.List;
 
 @Entity
+@Data
 public class Configuration extends BasicEntity {
 
 	@Id
@@ -47,65 +49,6 @@ public class Configuration extends BasicEntity {
 	@JoinColumn(name = "userId")
 	@RestResource(exported = false)
 	private User user;
-
-	public Configuration() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Visibility getVisibility() {
-		return visibility;
-	}
-
-	public void setVisibility(Visibility visibility) {
-		this.visibility = visibility;
-	}
-
-	public List<Slot> getSlots() {
-		return slots;
-	}
-
-	public void setSlots(List<Slot> slots) {
-		this.slots = slots;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	public Configuration id(final Long id) {
 		this.id = id;

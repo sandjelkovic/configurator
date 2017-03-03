@@ -1,24 +1,23 @@
 package com.saanx.configurator.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import java.math.BigDecimal;
 
 @Entity
+@Data
 public class SlotEntry extends BasicEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true, nullable = false)
 	private Long id;
 
 	@Version
@@ -33,76 +32,8 @@ public class SlotEntry extends BasicEntity {
 	private int position;
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "slot")
 	@RestResource(exported = false)
 	private Slot slot;
-
-	public SlotEntry() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public BigDecimal getValue() {
-		return value;
-	}
-
-	public void setValue(BigDecimal value) {
-		this.value = value;
-	}
-
-	public int getPosition() {
-		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
-	public Slot getSlot() {
-		return slot;
-	}
-
-	public void setSlot(Slot slot) {
-		this.slot = slot;
-	}
 
 	public SlotEntry id(final Long id) {
 		this.id = id;
@@ -142,38 +73,6 @@ public class SlotEntry extends BasicEntity {
 	public SlotEntry slot(final Slot slot) {
 		this.slot = slot;
 		return this;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof SlotEntry)) return false;
-		if (!super.equals(o)) return false;
-
-		SlotEntry slotEntry = (SlotEntry) o;
-
-		if (getPosition() != slotEntry.getPosition()) return false;
-		if (getId() != null ? !getId().equals(slotEntry.getId()) : slotEntry.getId() != null) return false;
-		if (getVersion() != null ? !getVersion().equals(slotEntry.getVersion()) : slotEntry.getVersion() != null) return false;
-		if (getName() != null ? !getName().equals(slotEntry.getName()) : slotEntry.getName() != null) return false;
-		if (getData() != null ? !getData().equals(slotEntry.getData()) : slotEntry.getData() != null) return false;
-		if (getUrl() != null ? !getUrl().equals(slotEntry.getUrl()) : slotEntry.getUrl() != null) return false;
-		if (getValue() != null ? !getValue().equals(slotEntry.getValue()) : slotEntry.getValue() != null) return false;
-		return getSlot() != null ? getSlot().equals(slotEntry.getSlot()) : slotEntry.getSlot() == null;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (getId() != null ? getId().hashCode() : 0);
-		result = 31 * result + (getVersion() != null ? getVersion().hashCode() : 0);
-		result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-		result = 31 * result + (getData() != null ? getData().hashCode() : 0);
-		result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
-		result = 31 * result + (getValue() != null ? getValue().hashCode() : 0);
-		result = 31 * result + getPosition();
-		result = 31 * result + (getSlot() != null ? getSlot().hashCode() : 0);
-		return result;
 	}
 
 	@Override
