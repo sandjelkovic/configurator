@@ -65,6 +65,11 @@ public class Slot extends BasicEntity {
 		return this;
 	}
 
+	public Slot position(final int position) {
+		this.position = position;
+		return this;
+	}
+
 	@Override
 	protected Object getInternalId() {
 		return getId();
