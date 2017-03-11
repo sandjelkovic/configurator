@@ -3,6 +3,7 @@ package com.saanx.configurator.config;
 import com.saanx.configurator.data.entity.Slot;
 import com.saanx.configurator.data.handlers.ConfigurationEventHandler;
 import com.saanx.configurator.data.repository.UserRepository;
+import com.saanx.configurator.processor.ConfigurationProcessor;
 import com.saanx.configurator.processor.SlotProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,5 +36,10 @@ public class ApplicationConfiguration {
 	@Bean
 	public ResourceProcessor<Resource<Slot>> slotProcessor() {
 		return new SlotProcessor();
+	}
+
+	@Bean
+	public ResourceProcessor<Resource<com.saanx.configurator.data.entity.Configuration>> configurationProcessor() {
+		return new ConfigurationProcessor();
 	}
 }
