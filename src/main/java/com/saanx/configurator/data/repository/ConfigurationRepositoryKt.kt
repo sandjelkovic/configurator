@@ -20,7 +20,7 @@ interface ConfigurationRepositoryKt : PagingAndSortingRepository<ConfigurationKt
     @PreAuthorize("#entity?.id == null or @configurationRepository.findOne(#entity?.id)?.user?.username == authentication.name")
     override fun <S : ConfigurationKt?> save(@Param("entity") entity: S): S
 
-    @PostAuthorize("returnObject?.user?.username == authentication.name or returnObject?.public")
+    @PostAuthorize("returnObject == null or returnObject?.user?.username?.equals(authentication.name) or returnObject?.public")
     override fun findOne(id: Long?): ConfigurationKt
 
     @PreAuthorize("@configurationRepository.findOne(#id)?.user.username == authentication.name")

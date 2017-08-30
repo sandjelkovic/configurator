@@ -19,7 +19,7 @@ public interface ConfigurationRepository extends PagingAndSortingRepository<Conf
 	Configuration save(@Param("entity") Configuration entity);
 
 	@Override
-	@PostAuthorize("returnObject?.user?.username == authentication.name or returnObject?.public")
+	@PostAuthorize("returnObject == null or returnObject?.user?.username?.equals(authentication.name) or returnObject?.public")
 	Configuration findOne(Long id);
 
 	@Override
